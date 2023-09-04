@@ -1,15 +1,27 @@
+// Dependencies
 const express = require ('express'); 
-const {connectToMongoDB} = require('./connect')
-const urlRoute = require('./routes/url')
-
 const app = express();
-const port = 6500;
-
-connectToMongoDB("mongodb://0.0.0.0:27017/short-url")
-.then(()=>console.log('mongo db connected'))
+require('dotenv').config() ;
+// Body Parser  
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+console.log(process.env.PORT)
+// Impoting Db connection 
+const dbConnection = require('./utils/connect')
+dbConnection()
+//Impoting routes
+const urlRoute = require('./routes/url')
+// Using routes
 app.use('/url',urlRoute)
+app.get('/',(req, res) => {
+    res.status(200).json({ message : "Hello world"})
+})
 
-app.listen(port,()=>console.log(`server started at PORT:${port}`))
+app.listen(process.env.PORT, (err) => {
+    if(err){
+        throw err
+    }
+    console.log(`server started at PORT:${process.env.PORT}`)
+})
 
 
