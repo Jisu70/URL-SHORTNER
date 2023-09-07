@@ -1,7 +1,5 @@
-import { nanoid } from 'nanoid';
-import Url from '../models/Url.js';
-import dotenv from 'dotenv';
-dotenv.config({ path: '../config/.env'});
+const { nanoid } = require('nanoid');
+const Url =  require('../models/Url.js');
 const { validateUrl } = require('../utils/isValid')
 // Short URL Generator
 const generateShortUrl = async (req, res) => {
@@ -10,11 +8,9 @@ const generateShortUrl = async (req, res) => {
     const urlId = nanoid();
     if (validateUrl(origUrl)) {
         try {
-            let url = await Url.findOne({
-                ValidUrl
-            });
+            let url = await Url.findOne({ origUrl });
             if (url) {
-                res.json(url);
+                res.json({ URL : url});
             } else {
                 const shortUrl = `${base}/${urlId}`;
                 url = new Url({

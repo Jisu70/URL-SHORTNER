@@ -5,7 +5,6 @@ require('dotenv').config() ;
 // Body Parser  
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-console.log(process.env.PORT)
 // Impoting Db connection 
 const dbConnection = require('./utils/connect')
 dbConnection()
