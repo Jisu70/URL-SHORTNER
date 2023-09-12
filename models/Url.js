@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const UrlSchema = new mongoose.Schema({
+const UrlSchema = new Schema({
   urlId: {
     type: String,
     required: true,
@@ -24,4 +24,4 @@ const UrlSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('Url', UrlSchema);
+export default model('Url', UrlSchema);

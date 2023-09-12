@@ -1,6 +1,7 @@
-const { nanoid } = require('nanoid');
-const Url =  require('../models/Url.js');
-const { validateUrl } = require('../utils/isValid')
+import { nanoid } from 'nanoid';
+import Url, { findOne } from '../models/Url.js';
+import { validateUrl } from '../utils/isValid';
+
 // Short URL Generator
 const generateShortUrl = async (req, res) => {
     const { origUrl } = req.body;
@@ -8,9 +9,9 @@ const generateShortUrl = async (req, res) => {
     const urlId = nanoid();
     if (validateUrl(origUrl)) {
         try {
-            let url = await Url.findOne({ origUrl });
+            let url = await findOne({ origUrl });
             if (url) {
-                res.json({ URL : url});
+                res.json({ URL: url.origUrl });
             } else {
                 const shortUrl = `${base}/${urlId}`;
                 url = new Url({
@@ -23,11 +24,12 @@ const generateShortUrl = async (req, res) => {
                 res.json(url);
             }
         } catch (err) {
-            console.log(err);
+            console.error(err);
             res.status(500).json('Server Error');
         }
     } else {
         res.status(400).json('Invalid Original Url');
     }
 };
-module.exports = generateShortUrl;
+
+export default generateShortUrl;

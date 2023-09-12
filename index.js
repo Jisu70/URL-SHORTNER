@@ -1,15 +1,17 @@
 // Dependencies
-const express = require ('express'); 
+import express, { urlencoded, json } from 'express'; 
 const app = express();
-require('dotenv').config() ;
+import dotenv from 'dotenv';
+// Load environment variables from .env
+dotenv.config();;
 // Body Parser  
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(urlencoded({ extended: true }));
+app.use(json());
 // Impoting Db connection 
-const dbConnection = require('./utils/connect')
+import dbConnection from './utils/connect.js';
 dbConnection()
 //Impoting routes
-const urlRoute = require('./routes/url')
+import urlRoute from './routes/url.js';
 // Using routes
 app.use('/url',urlRoute)
 app.get('/',(req, res) => {
