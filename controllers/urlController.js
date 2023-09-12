@@ -32,4 +32,4 @@ const generateShortUrl = async (req, res) => {
     }
 };
 
-export default generateShortUrl;
+export { generateShortUrl };
