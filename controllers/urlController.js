@@ -1,13 +1,12 @@
 import { nanoid } from 'nanoid';
-import Url, { findOne } from '../models/Url.js';
-import { validateUrl } from '../utils/isValid';
+import Url from '../models/Url.js';
 
 // Short URL Generator
 const generateShortUrl = async (req, res) => {
     const { origUrl } = req.body;
     const base = process.env.BASE;
     const urlId = nanoid();
-    if (validateUrl(origUrl)) {
+    if (origUrl) {
         try {
             let url = await findOne({ origUrl });
             if (url) {

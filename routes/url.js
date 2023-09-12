@@ -1,7 +1,6 @@
-import { Router } from 'express';
-// import generateUrlController from '../controllers/urlController.js';
-import { generateShortUrl } from '../controllers/urlController';
-const router = Router();
+import express from 'express';
+import { generateShortUrl } from '../controllers/urlController.js';
+const router = express.Router();
 
 
 router.post('/', generateShortUrl)
