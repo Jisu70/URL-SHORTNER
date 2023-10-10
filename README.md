@@ -35,8 +35,8 @@ Create a .env file in the project root directory to store environment-specific c
 ```readme
 PORT=3000  # Specify the port you want the server to run on
 MONGO_URI=<your-mongodb-uri>  # MongoDB connection URI
-Replace <your-mongodb-uri> with the actual URI of your MongoDB database.
 ```
+Replace <your-mongodb-uri> with the actual URI of your MongoDB database.
 
 ## Running the Application
 Start the server by running the following command:
